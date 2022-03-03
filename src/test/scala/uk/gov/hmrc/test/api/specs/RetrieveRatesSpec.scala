@@ -14,18 +14,26 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.helpers
+package uk.gov.hmrc.test.api.specs
 
-import org.scalatest.Assertions.fail
-import play.api.libs.ws.StandaloneWSRequest
-import uk.gov.hmrc.test.api.service.AuthService
+import uk.gov.hmrc.test.api.models.User
+import uk.gov.hmrc.test.api.models.User._
 
-class AuthHelper {
+class RetrieveRatesSpec extends BaseSpec {
 
-  val authAPI: AuthService = new AuthService
+  Feature("Retrieve rates from forex-rates service") {
 
-  def getAuthBearerToken: String = {
-    val authServiceRequestResponse: StandaloneWSRequest#Self#Response = authAPI.postLogin
-    authServiceRequestResponse.header("Authorization").getOrElse(fail("Could not obtain auth bearer token"))
+    Scenario("Use test-only endpoint to successfully retrieve rates from forex-rates service") {
+
+      When("The test-only endpoint is called")
+
+      val response = retrieveRatesHelper.retrieveRatesAPI.retrieveRates
+
+      Then("The rates are retrieved from the forex-rates service")
+
+      response.status shouldBe 200
+
+    }
+
   }
 }

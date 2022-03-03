@@ -25,33 +25,13 @@ import uk.gov.hmrc.test.api.models.User
 import scala.concurrent.Await
 import scala.concurrent.duration._
 
-class IndividualsMatchingService extends HttpClient {
-  val host: String                   = TestConfiguration.url("ims")
-  val individualsMatchingURL: String = s"$host/"
+class RetrieveRatesService extends HttpClient {
+  val host: String             = TestConfiguration.url("one-stop-shop-forex-rates")
+  val retrieveRatesUrl: String = s"$host/test-only/retrieve-and-send"
 
-  def getIndividualByMatchId(authToken: String, matchId: String): StandaloneWSRequest#Self#Response =
+  def retrieveRates: StandaloneWSRequest#Self#Response =
     Await.result(
-      get(
-        individualsMatchingURL + matchId,
-        ("Authorization", authToken),
-        ("CorrelationId", "12345678"),
-        ("Accept", "application/vnd.hmrc.P1.0+json")
-      ),
+      get(retrieveRatesUrl),
       10.seconds
     )
-
-  def postIndividualPayload(authToken: String, individual: User): StandaloneWSRequest#Self#Response = {
-    val individualPayload = Json.toJsObject(individual)
-    Await.result(
-      post(
-        individualsMatchingURL,
-        Json.stringify(individualPayload),
-        ("Content-Type", "application/json"),
-        ("Authorization", authToken),
-        ("CorrelationId", "12345678"),
-        ("Accept", "application/vnd.hmrc.P1.0+json")
-      ),
-      10.seconds
-    )
-  }
 }

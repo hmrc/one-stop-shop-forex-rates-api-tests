@@ -19,16 +19,13 @@ package uk.gov.hmrc.test.api.helpers
 import play.api.libs.json.Json
 import play.api.libs.ws.StandaloneWSRequest
 import uk.gov.hmrc.test.api.models.User
-import uk.gov.hmrc.test.api.service.IndividualsMatchingService
+import uk.gov.hmrc.test.api.service.RetrieveRatesService
 
-class IndividualsMatchingHelper {
+class RetrieveRatesHelper {
 
-  val individualsMatchingServiceAPI: IndividualsMatchingService = new IndividualsMatchingService
+  val retrieveRatesAPI: RetrieveRatesService = new RetrieveRatesService
 
-  def getIndividualByMatchId(authBearerToken: String, individualsMatchId: String): User = {
-    val individualsMatchGetResponse: StandaloneWSRequest#Self#Response =
-      individualsMatchingServiceAPI.getIndividualByMatchId(authBearerToken, individualsMatchId)
-    (Json.parse(individualsMatchGetResponse.body) \ "individual").as[User]
-  }
+  def retrieveRates: Unit =
+    retrieveRatesAPI.retrieveRates
 
 }
