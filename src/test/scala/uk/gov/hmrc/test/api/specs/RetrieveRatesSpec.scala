@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 HM Revenue & Customs
+ * Copyright 2022 HM Revenue & Customs
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,6 @@
  */
 
 package uk.gov.hmrc.test.api.specs
-
-import uk.gov.hmrc.test.api.models.User
-import uk.gov.hmrc.test.api.models.User._
 
 class RetrieveRatesSpec extends BaseSpec {
 
