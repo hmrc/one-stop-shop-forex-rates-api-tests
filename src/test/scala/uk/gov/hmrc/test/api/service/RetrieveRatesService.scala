@@ -14,14 +14,22 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.specs
+package uk.gov.hmrc.test.api.service
 
-import org.scalatest._
-import org.scalatest.concurrent.Eventually
-import org.scalatest.featurespec.AnyFeatureSpec
-import org.scalatest.matchers.should.Matchers
-import uk.gov.hmrc.test.api.helpers.RetrieveRatesHelper
+import play.api.libs.ws.StandaloneWSRequest
+import uk.gov.hmrc.test.api.client.HttpClient
+import uk.gov.hmrc.test.api.conf.TestConfiguration
 
-trait BaseSpec extends AnyFeatureSpec with GivenWhenThen with BeforeAndAfterAll with Matchers with Eventually {
-  val retrieveRatesHelper = new RetrieveRatesHelper
+import scala.concurrent.Await
+import scala.concurrent.duration._
+
+class RetrieveRatesService extends HttpClient {
+  val host: String             = TestConfiguration.url("one-stop-shop-forex-rates")
+  val retrieveRatesUrl: String = s"$host/test-only/retrieve-and-send"
+
+  def retrieveRates: StandaloneWSRequest#Self#Response =
+    Await.result(
+      get(retrieveRatesUrl),
+      10.seconds
+    )
 }
