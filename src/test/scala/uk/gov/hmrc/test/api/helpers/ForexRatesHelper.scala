@@ -14,15 +14,26 @@
  * limitations under the License.
  */
 
-package uk.gov.hmrc.test.api.specs
+package uk.gov.hmrc.test.api.helpers
 
-import org.scalatest._
-import org.scalatest.concurrent.Eventually
-import org.scalatest.featurespec.AnyFeatureSpec
-import org.scalatest.matchers.should.Matchers
-import uk.gov.hmrc.test.api.helpers.{ForexRatesHelper, RetrieveRatesHelper}
+import uk.gov.hmrc.test.api.service.ForexRatesService
+import uk.gov.hmrc.test.api.utils.ApiLogger.log
 
-trait BaseSpec extends AnyFeatureSpec with GivenWhenThen with BeforeAndAfterAll with Matchers with Eventually {
-  val retrieveRatesHelper = new RetrieveRatesHelper
-  val forexRatesHelper    = new ForexRatesHelper
+class ForexRatesHelper {
+
+  val forexRatesAPI: ForexRatesService = new ForexRatesService
+
+  def triggerRssFeedRetrieval(): Boolean = {
+    val response = forexRatesAPI.triggerRssFeedRetrieval()
+
+    if (response.status == 200) {
+      true
+    } else {
+      log.error(
+        s"Unexpected status when calling trigger RSS feed retrieval. Status ${response.status} ${response.body}"
+      )
+      false
+    }
+  }
+
 }
