@@ -16,11 +16,17 @@
 
 package uk.gov.hmrc.test.api.specs
 
+import scala.concurrent.Await
+
 class RetrieveRatesSpec extends BaseSpec {
 
   Feature("Retrieve rates from forex-rates service") {
 
     Scenario("Use test-only endpoint to successfully retrieve rates from forex-rates service") {
+
+      Given("There are rates available")
+
+      forexRatesHelper.triggerRssFeedRetrieval()
 
       When("The test-only endpoint is called")
 
