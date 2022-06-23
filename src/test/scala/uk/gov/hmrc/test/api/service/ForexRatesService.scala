@@ -16,11 +16,11 @@
 
 package uk.gov.hmrc.test.api.service
 
-import play.api.libs.ws.{DefaultWSProxyServer, StandaloneWSRequest}
+import play.api.libs.ws.StandaloneWSRequest
 import uk.gov.hmrc.test.api.client.HttpClient
 import uk.gov.hmrc.test.api.conf.TestConfiguration
 
-import scala.concurrent.{Await, Future}
+import scala.concurrent.Await
 import scala.concurrent.duration._
 
 class ForexRatesService extends HttpClient {
