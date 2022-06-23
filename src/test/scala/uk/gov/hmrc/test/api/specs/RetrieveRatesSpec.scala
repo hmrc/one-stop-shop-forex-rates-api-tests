@@ -16,8 +16,6 @@
 
 package uk.gov.hmrc.test.api.specs
 
-import scala.concurrent.Await
-
 class RetrieveRatesSpec extends BaseSpec {
 
   Feature("Retrieve rates from forex-rates service") {
