@@ -3,7 +3,7 @@ lazy val testSuite = (project in file("."))
   .settings(
     name := "one-stop-shop-forex-rates-api-tests",
     version := "0.1.0",
-    scalaVersion := "3.5.2",
+    scalaVersion := "3.4.2",
     scalacOptions ++= Seq("-feature"),
     libraryDependencies ++= Dependencies.test
   )

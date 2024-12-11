@@ -27,7 +27,7 @@ class ForexRatesService extends HttpClient {
   val host: String              = TestConfiguration.url("forex-rates")
   val triggerRssFeedURL: String = s"$host/test-only/retrieve-rates"
 
-  def triggerRssFeedRetrieval(): StandaloneWSRequest#Self#Response =
+  def triggerRssFeedRetrieval() =
     Await.result(
       get(triggerRssFeedURL),
       10.seconds

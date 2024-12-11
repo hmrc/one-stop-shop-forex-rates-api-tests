@@ -27,7 +27,7 @@ class RetrieveRatesService extends HttpClient {
   val host: String             = TestConfiguration.url("one-stop-shop-forex-rates")
   val retrieveRatesUrl: String = s"$host/test-only/retrieve-and-send"
 
-  def retrieveRates: StandaloneWSRequest#Self#Response =
+  def retrieveRates =
     Await.result(
       get(retrieveRatesUrl),
       10.seconds
