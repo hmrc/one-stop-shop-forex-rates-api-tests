@@ -16,7 +16,6 @@
 
 package uk.gov.hmrc.test.api.service
 
-import play.api.libs.ws.StandaloneWSRequest
 import uk.gov.hmrc.test.api.client.HttpClient
 import uk.gov.hmrc.test.api.conf.TestConfiguration
 
@@ -27,7 +26,7 @@ class RetrieveRatesService extends HttpClient {
   val host: String             = TestConfiguration.url("one-stop-shop-forex-rates")
   val retrieveRatesUrl: String = s"$host/test-only/retrieve-and-send"
 
-  def retrieveRates: StandaloneWSRequest#Self#Response =
+  def retrieveRates =
     Await.result(
       get(retrieveRatesUrl),
       10.seconds
